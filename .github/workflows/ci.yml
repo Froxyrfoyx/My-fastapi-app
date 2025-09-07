@@ -1,0 +1,16 @@
+name: CI
+on:
+    push:
+        branches: [ main ]
+    pull_request:
+        branches: [ main ] 
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v2
+            - name: Build Docker image
+              run: docker build -t my-app:latest .
+            - name: Test docker container
+              run: docker run --rm my-app:latest echo "Container runs"  
